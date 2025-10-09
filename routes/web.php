@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/myprofile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/myprofile', [AdminController::class, 'Update_Profile'])->name('update.profile');
     Route::post('/myprofile/store', [AdminController::class, 'AdminProfileStore'])->name('profile.store');
+});
+Route::middleware('auth')->group(function () {
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('all/review', 'AllReview')->name('admin.review');
+        Route::get('add/review', 'AddReview')->name('admin.addreview');
+        Route::post('add/review', 'store')->name('store.review');
+    });
 });
 
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');

@@ -5,7 +5,7 @@
         <div id="sidebar-menu">
 
             <div class="logo-box">
-                <a href="index.html" class="logo logo-light">
+                <a href="/" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('backend/assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
@@ -13,7 +13,7 @@
                         <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="24">
                     </span>
                 </a>
-                <a href="index.html" class="logo logo-dark">
+                <a href="/" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset('backend/assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
@@ -47,31 +47,16 @@
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
-                        <span> Authentication </span>
+                        <span> Review </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAuth">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="auth-login.html" class="tp-link">Log In</a>
+                                <a href="{{ route('admin.review') }}" class="tp-link">All review</a>
                             </li>
                             <li>
-                                <a href="auth-register.html" class="tp-link">Register</a>
-                            </li>
-                            <li>
-                                <a href="auth-recoverpw.html" class="tp-link">Recover Password</a>
-                            </li>
-                            <li>
-                                <a href="auth-lock-screen.html" class="tp-link">Lock Screen</a>
-                            </li>
-                            <li>
-                                <a href="auth-confirm-mail.html" class="tp-link">Confirm Mail</a>
-                            </li>
-                            <li>
-                                <a href="email-verification.html" class="tp-link">Email Verification</a>
-                            </li>
-                            <li>
-                                <a href="auth-logout.html" class="tp-link">Logout</a>
+                                <a href="{{ route('admin.addreview') }}" class="tp-link">Add review</a>
                             </li>
                         </ul>
                     </div>
