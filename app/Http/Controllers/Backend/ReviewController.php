@@ -51,4 +51,42 @@ class ReviewController extends Controller
 
     }
     //end method
+
+
+    public function UpdateReview($id)
+    {
+        $review = Review::findOrFail($id);
+        return view('admin.partial.review.edit', compact('review'));
+    }
+    //end method
+
+
+    public function update(Request $request, $id)
+    {
+        $review = Review::findOrFail($id);
+        $review->update($request->all());
+
+        $notification = array(
+            'message' => 'Review updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('admin.review')->with($notification);
+    }
+    //end method
+
+    public function destroy($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->delete();
+
+        $notification = array(
+            'message' => 'Review deleted successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+
+
+    }
+    // end method
 }

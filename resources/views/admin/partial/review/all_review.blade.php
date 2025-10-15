@@ -39,13 +39,16 @@
                                                 <td>{{ $rev->name }}</td>
                                                 <td>{{ $rev->position }}</td>
                                                 <td><img src="{{ asset('backend/assets/upload/' . $rev->photo)  }}"
-                                                        style="width: 100%; height: 80px;" alt="picture of a person"></td>
+                                                        style="width: 100%; height: 110px;" alt="picture of a person"></td>
                                                 <td>
-                                                    <textarea name="message" rows="4" cols="50" id="">{{ $rev->review }}</textarea>
+                                                    <textarea name="message" rows="4" cols="50" id=""
+                                                        disabled>{{ $rev->review }}</textarea>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="btn btn-success btn-sm">Edit</a>
-                                                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                                    <a href="{{ route('view.update.review', $rev->id) }}"
+                                                        class="btn btn-success btn-sm">Edit</a>
+                                                    <a href="{{ route('delete.review', $rev->id) }}"
+                                                        class="btn btn-danger btn-sm">Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach

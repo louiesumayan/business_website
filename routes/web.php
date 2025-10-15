@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
         Route::get('all/review', 'AllReview')->name('admin.review');
         Route::get('add/review', 'AddReview')->name('admin.addreview');
         Route::post('add/review', 'store')->name('store.review');
+        Route::get('edit/review/{id}', 'UpdateReview')->name('view.update.review');
+        Route::post('edit/review/{id}', 'update')->name('update.review');
+        Route::get('delete/review/{id}', 'destroy')->name('delete.review');
     });
 });
 
