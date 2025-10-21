@@ -100,14 +100,21 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         $review = Review::findOrFail($id);
+
+        // Delete the photo file if it exists
+        if ($review->photo && file_exists(public_path('backend/assets/upload/' . $review->photo))) {
+            unlink(public_path('backend/assets/upload/' . $review->photo));
+        }
+
         $review->delete();
 
-        $notification = array(
+        $notification = [
             'message' => 'Review deleted successfully!',
             'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+        ];
 
+        return redirect()->back()->with($notification);
     }
-    // end method
+    //end method
+
 }
