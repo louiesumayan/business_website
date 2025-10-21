@@ -64,15 +64,37 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         $review = Review::findOrFail($id);
-        $review->update($request->all());
 
-        $notification = array(
+        $validated = $request->validate([
+            'name' => 'max:50',
+            'position' => 'max:50',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'review' => 'max:150',
+        ]);
+
+        // Handle photo upload only if there's a new file
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $imageName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('backend/assets/upload'), $imageName);
+            $validated['photo'] = $imageName;
+
+            // Optional: delete the old photo
+            if ($review->photo && file_exists(public_path('backend/assets/upload/' . $review->photo))) {
+                unlink(public_path('backend/assets/upload/' . $review->photo));
+            }
+        }
+
+        $review->update($validated);
+
+        $notification = [
             'message' => 'Review updated successfully!',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->route('admin.review')->with($notification);
     }
+
     //end method
 
     public function destroy($id)
@@ -85,7 +107,6 @@ class ReviewController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
-
 
     }
     // end method
