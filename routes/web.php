@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/review/{id}', 'UpdateReview')->name('view.update.review');
         Route::post('edit/review/{id}', 'update')->name('update.review');
         Route::get('delete/review/{id}', 'destroy')->name('delete.review');
+    });
+    Route::controller(SliderController::class)->group(function () {
+        Route::get('/get/slider', 'index')->name('get.slider');
+        Route::post('/get/slider', 'update')->name('post.slider');
     });
 });
 

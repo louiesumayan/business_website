@@ -65,25 +65,13 @@
                 <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
-                        <span> Error Pages </span>
+                        <span> Slider Pages </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarError">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="error-404.html" class="tp-link">Error 404</a>
-                            </li>
-                            <li>
-                                <a href="error-500.html" class="tp-link">Error 500</a>
-                            </li>
-                            <li>
-                                <a href="error-503.html" class="tp-link">Error 503</a>
-                            </li>
-                            <li>
-                                <a href="error-429.html" class="tp-link">Error 429</a>
-                            </li>
-                            <li>
-                                <a href="offline-page.html" class="tp-link">Offline Page</a>
+                                <a href="{{ route('get.slider') }}" class="tp-link">Get Slider</a>
                             </li>
                         </ul>
                     </div>
