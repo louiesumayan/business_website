@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $testimonials = Review::latest()->get();
     return view('index/index', compact('testimonials'));
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('admin.index');

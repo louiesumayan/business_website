@@ -21,7 +21,7 @@ class SliderController extends Controller
 
         $sliderData = $request->validate([
             'title' => 'max:50',
-            'description' => 'max:50',
+            'description' => 'max:150',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'link' => 'max:150',
         ]);
