@@ -6,8 +6,14 @@
         <div class="row">
             <div class="col-lg-7 d-flex align-items-center">
                 <div class="lonyo-hero-content" data-aos="fade-up" data-aos-duration="700">
-                    <h1 class="hero-title">{{ $slider->title }}</h1>
-                    <p class="text">{{ $slider->description }}</p>
+                    <h1 id="slider_title" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $slider->id }}" class="hero-title">
+                        {{ $slider->title }}
+                    </h1>
+                    <p id="slider_description" contenteditable="{{ auth()->check() ? 'true' : 'false' }}"
+                        data-id="{{ $slider->id }}" class="text">{{ $slider->description }}</p>
+
+
                     <div class="mt-50" data-aos="fade-up" data-aos-duration="900">
                         <a href="{{ $slider->link }}" class="lonyo-default-btn hero-btn">Contact Us!</a>
                     </div>
@@ -25,3 +31,21 @@
         </div>
     </div>
 </div>
+
+<!-- CSRF TOKEN -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const titleElement = document.getElementById('slider_title')
+        const descElement = document.getElementById('slider_description')
+
+        function saveChanges(element) {
+            let sliderId = element.dataset.id;
+            let field = element.id === "slider_title" ? "title" : "description";
+            let newValue = element.innerText.trim();
+
+            fetch(`/edit-slider/${sliderId}`)
+        }
+    })
+</script>
