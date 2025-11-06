@@ -26,8 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/myprofile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/myprofile', [AdminController::class, 'Update_Profile'])->name('update.profile');
     Route::post('/myprofile/store', [AdminController::class, 'AdminProfileStore'])->name('profile.store');
-});
-Route::middleware('auth')->group(function () {
+
     Route::controller(ReviewController::class)->group(function () {
         Route::get('all/review', 'AllReview')->name('admin.review');
         Route::get('add/review', 'AddReview')->name('admin.addreview');
@@ -40,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/get/slider', 'index')->name('get.slider');
         Route::post('/get/slider', 'update')->name('post.slider');
     });
+
 });
 
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
