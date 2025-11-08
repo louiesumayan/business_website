@@ -20,9 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/myprofile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/myprofile', [AdminController::class, 'Update_Profile'])->name('update.profile');
     Route::post('/myprofile/store', [AdminController::class, 'AdminProfileStore'])->name('profile.store');
@@ -38,9 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::controller(SliderController::class)->group(function () {
         Route::get('/get/slider', 'index')->name('get.slider');
         Route::post('/get/slider', 'update')->name('post.slider');
+        Route::post('/edit/slider/{id}', 'editSlider');
     });
 
 });
+
 
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 Route::post('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');

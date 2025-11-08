@@ -45,7 +45,46 @@
             let field = element.id === "slider_title" ? "title" : "description";
             let newValue = element.innerText.trim();
 
-            fetch(`/edit-slider/${sliderId}`)
+            fetch(`/edit/slider/${sliderId}`, {
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ [field]: newValue })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.json();
+                })
+
+                .then(data => {
+                    if (data.success) {
+                        console.log(`${field} updated succesfully`)
+                    }
+                })
+                .catch(error => { console.error("Error:", error) })
         }
-    })
+        // end method
+
+        //auto save
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                saveChanges(e.target);
+            }
+        })
+        //end event
+
+        //save if lost focus
+        titleElement.addEventListener("blur", function () {
+            saveChanges(titleElement);
+        })
+        //end event
+        descElement.addEventListener("blur", function () {
+            saveChanges(descElement);
+        })
+        //end event
+
+    })//end event
 </script>
